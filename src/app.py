@@ -1,8 +1,11 @@
+import os
 import json
 import time
 import pandas as pd
 import requests
 import streamlit as st
+from dotenv import load_dotenv
+load_dotenv()
 
 # IMPORTA A OBSERVABILIDADE
 from observability import (
@@ -12,9 +15,9 @@ from observability import (
 )
 
 # ================= CONFIGURAÇÃO =================
-
-OLLAMA_URL = "http://localhost:11434/api/generate"
-MODELO = "gpt-oss:20b-cloud"
+OLLAMA_URL = os.getenv("OLLAMA_URL")
+OLLAMA_API_KEY = os.getenv("OLLAMA_API_KEY")
+MODELO = os.getenv("OLLAMA_MODEL")
 
 # ================= CARREGAMENTO DOS DADOS =================
 
@@ -145,6 +148,10 @@ Pergunta do usuário:
 
     response = requests.post(
         OLLAMA_URL,
+         headers={
+        "Authorization": f"Bearer {OLLAMA_API_KEY}",
+        "Content-Type": "application/json"
+    },
         json={
             "model": MODELO,
             "prompt": prompt,
