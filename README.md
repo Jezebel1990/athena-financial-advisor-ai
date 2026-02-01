@@ -1,149 +1,248 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# 🤖 Atena — Conselheira Financeira com IA Generativa
 
-## Contexto
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg" />
+  <img src="https://img.shields.io/badge/Streamlit-1.28+-FF4B4B.svg" />
+  <img src="https://img.shields.io/badge/Langfuse-Enabled-orange.svg" />
+</p>
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
 
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
+A **Atena** é um protótipo de agente financeiro inteligente que utiliza **IA Generativa** para apoiar usuários na tomada de decisões financeiras de forma **consciente, contextualizada e responsável**.
 
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+![Atena Interface](./assets/screencapture-localhost.png)
 
----
 
-## O Que Você Deve Entregar
+Diferente de chatbots tradicionais, a Atena atua como uma **conselheira consultiva**, apresentando **cenários comparativos (“seguir” vs. “não seguir”)**, respeitando o perfil do usuário, suas metas e limitações — sem impor decisões ou prometer resultados.
 
-### 1. Documentação do Agente
-
-Defina **o que** seu agente faz e **como** ele funciona:
-
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
-
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+Este repositório reúne **documentação conceitual, base de conhecimento mockada, aplicação funcional, prompts e métricas**, servindo como estudo de caso de **IA aplicada ao domínio financeiro**.
 
 ---
 
-### 2. Base de Conhecimento
+## ✨ Objetivos do Projeto
 
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
+- Demonstrar o uso de **IA Generativa como apoio à decisão**, não como agente prescritivo
+- Aplicar práticas de **segurança, anti-alucinação e responsabilidade**
+- Utilizar **engenharia de prompts orientada a cenários**
+- Integrar **base de conhecimento estruturada** (CSV / JSON)
+- Avaliar qualidade e desempenho com **métricas e observabilidade (Langfuse)**
 
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
+---
+## 🧠 O que é a Atena?
 
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
+A Atena é uma agente financeira assistente com personalidade:
 
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+- Consultiva e educativa  
+- Empática e acessível  
+- Analítica e responsável  
+
+Ela ajuda o usuário a:
+- Organizar finanças pessoais  
+- Avaliar impactos futuros de decisões  
+- Entender riscos e benefícios antes de agir  
+- Acompanhar metas financeiras  
+
+Sempre utilizando **exclusivamente os dados fornecidos**, declarando limitações quando necessário.
 
 ---
 
-### 3. Prompts do Agente
+## 🏗️ Visão Geral da Arquitetura (C4 – Nível Sistema)
 
-Documente os prompts que definem o comportamento do seu agente:
+A Atena foi projetada como um **sistema de apoio à decisão financeira**, no qual o modelo de linguagem é apenas um componente controlado do fluxo, e não o decisor final.
 
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
+```mermaid
+flowchart LR
+    Usuario[👤 Usuário<br/>Cliente Final]
+    Atena[🤖 Sistema Atena<br/>Conselheira Financeira com IA]
+    Ollama[🧠 LLM Local<br/>Ollama]
+    Dados[(📊 Base de Conhecimento<br/>CSV / JSON)]
+    Langfuse[📈 Langfuse<br/>Observabilidade]
 
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
+    Usuario -->|Perguntas financeiras| Atena
+    Atena -->|Respostas com cenários| Usuario
 
----
+    Atena -->|Prompts + Contexto| Ollama
+    Ollama -->|Texto gerado| Atena
 
-### 4. Aplicação Funcional
+    Atena -->|Leitura de dados| Dados
 
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
-
-```
-📁 lab-agente-financeiro/
-│
-├── 📄 README.md
-│
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
-│
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
+    Atena -->|Traces, métricas e logs| Langfuse
 ```
 
+
+### Componentes Principais
+
+| Componente | Responsabilidade |
+|-----------|-----------------|
+| **Interface Conversacional** | Interação com usuário via Streamlit |
+| **Motor de Contexto** | Montagem dinâmica de dados relevantes |
+| **LLM (Atena)** | Geração de respostas consultivas |
+| **Base de Conhecimento** | Perfil, histórico, transações e produtos |
+| **Motor de Regras** | Validação e conformidade |
+| **Gerador de Cenários** | Comparações "seguir" vs. "não seguir" |
+| **Camada de Segurança** | Anti-alucinação e validações |
+
+> 📌 **Detalhamento completo**: [`docs/01-documentacao-agente.md`](docs/01-documentacao-agente.md)
+
 ---
 
-## Dicas Finais
+## 📁 Estrutura do Projeto
 
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+```
+├── 📂 src/
+│   ├── app.py                 # Aplicação principal (Streamlit)
+│   ├── observability.py       # Integração com Langfuse
+│   └── requirements.txt       # Dependências
+│
+├── 📂 data/                   # Base de conhecimento mockada
+│   ├── perfil_investidor.json
+│   ├── historico_conversas.csv
+│   ├── transacoes.csv
+│   └── produtos_financeiros.json
+│
+├── 📂 docs/                   # Documentação técnica
+│   ├── 01-documentacao-agente.md
+│   ├── 02-base-conhecimento.md
+│   ├── 03-prompts.md
+│   └── 04-metricas.md
+│
+└── README.md
+```
+
+### Descrição dos Arquivos Principais
+
+**`app.py`**
+- Interface conversacional
+- Integração com LLM
+- Montagem de contexto
+- Fluxo completo de interação
+
+**`observability.py`**
+- Tracing com Langfuse
+- Métricas de latência e tokens
+- Monitoramento de custos
+- Registro de metadados
+
+---
+
+## ⚡ Como Executar
+
+### Pré-requisitos
+
+- Python 3.9+
+- [Ollama](https://ollama.ai/) instalado
+- Modelo LLM disponível
+
+### 1️⃣ Setup do Ollama
+
+```bash
+# Executar o modelo local
+ollama run gpt-oss:20b-cloud
+```
+
+> 💡 O projeto suporta outros modelos locais ou APIs externas de LLM
+
+### 2️⃣ Instalação
+
+```bash
+# Clonar o repositório
+git clone https://github.com/Jezebel1990/athena-financial-advisor-ai.git
+cd athena-financial-advisor-ai
+
+# Criar ambiente virtual (recomendado)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou
+venv\Scripts\activate     # Windows
+
+# Instalar dependências
+pip install -r requirements.txt
+```
+
+### 3️⃣ Execução
+
+```bash
+# Rodar a aplicação
+python -m streamlit run src/app.py
+```
+
+A interface será aberta automaticamente no navegador em `http://localhost:8501`
+
+### 4️⃣ Configuração do Langfuse
+
+```bash
+# Adicionar variáveis de ambiente
+export LANGFUSE_PUBLIC_KEY="sua-chave"
+export LANGFUSE_SECRET_KEY="sua-chave-secreta"
+export LANGFUSE_HOST="https://cloud.langfuse.com"
+```
+
+---
+
+## 📚 Documentação
+
+A documentação está organizada em módulos independentes:
+
+| Documento | Conteúdo |
+|-----------|----------|
+| [`01-documentacao-agente.md`](docs/01-documentacao-agente.md) | Problema, solução, persona, arquitetura e segurança |
+| [`02-base-conhecimento.md`](docs/02-base-conhecimento.md) | Estrutura de dados, perfil, metas e contexto |
+| [`03-prompts.md`](docs/03-prompts.md) | System prompts, regras e exemplos de interação |
+| [`04-metricas.md`](docs/04-metricas.md) | Avaliação, testes, feedback e aprendizados |
+
+---
+
+## 🛠️ Tecnologias
+
+### Core
+
+- **Python** - Linguagem principal
+- **Streamlit** - Interface conversacional
+- **Ollama** - Runtime de LLM local
+- **Langfuse** - Observabilidade e tracing
+
+### Dados
+
+- **CSV/JSON** - Base de conhecimento estruturada
+- **Pandas** - Manipulação de dados
+
+### Diagramação
+
+- **Mermaid** - Diagramas como código
+
+---
+
+## 📊 Observabilidade
+
+A aplicação é totalmente instrumentada com **Langfuse**, permitindo:
+
+| Métrica | Descrição |
+|---------|-----------|
+| 🔍 **Tracing** | Rastreamento completo de interações |
+| ⏱️ **Latência** | Tempo de resposta por componente |
+| 🎯 **Tokens** | Consumo de tokens por requisição |
+| 💰 **Custos** | Estimativa de custos operacionais |
+| 🛡️ **Auditoria** | Registro de comportamento do agente |
+
+> 📌 **Detalhes**: [`docs/04-metricas.md`](docs/04-metricas.md)
+
+---
+
+
+## ⚖️ Aviso Legal
+
+> ⚠️ **Este projeto é educacional e demonstrativo.**
+> 
+> A Atena **NÃO substitui consultoria financeira profissional**.
+> 
+> Todas as respostas são baseadas em dados mockados e não devem ser utilizadas para decisões financeiras reais.
+
+---
+
+## 📄 Licença
+
+Este projeto é disponibilizado apenas para fins educacionais e demonstrativos.
+
+---
+
+## 👤 Autora
+Feito com ❤️ por [Jezebel Guedes](https://www.linkedin.com/in/jezebel-guedes/) 👋Vamos nos conectar!

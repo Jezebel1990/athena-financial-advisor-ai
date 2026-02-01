@@ -1,6 +1,6 @@
-data,canal,tema,resumo,resolvido
-2025-09-15,chat,CDB,Cliente perguntou sobre rentabilidade e prazos,sim
-2025-09-22,telefone,Problema no app,Erro ao visualizar extrato foi corrigido,sim
-2025-10-01,chat,Tesouro Selic,Cliente pediu explicação sobre o funcionamento do Tesouro Direto,sim
-2025-10-12,chat,Metas financeiras,Cliente acompanhou o progresso da reserva de emergência,sim
-2025-10-25,email,Atualização cadastral,Cliente atualizou e-mail e telefone,sim
+data,canal,tema,contexto,cenarios_apresentados,decisao_usuario,status
+2025-09-15,chat,Renda fixa,Entendimento sobre investimentos conservadores,"Seguir: investir em CDB com liquidez diária | Não seguir: manter dinheiro parado",Apenas esclarecimento,encerrado
+2025-09-22,telefone,Aplicativo financeiro,Problema técnico ao acessar extrato,"Seguir: corrigir erro para acompanhar gastos | Não seguir: continuar sem visibilidade financeira",Correção realizada,encerrado
+2025-10-01,chat,Tesouro Selic,Compreensão do funcionamento do Tesouro Direto,"Seguir: usar como reserva de emergência | Não seguir: manter reserva fora de investimentos",Apenas esclarecimento,encerrado
+2025-10-12,chat,Metas financeiras,Acompanhamento da reserva de emergência,"Seguir: separar valor mensal | Não seguir: atraso na conclusão da reserva",Em acompanhamento,acompanhado
+2025-10-25,email,Dados cadastrais,Atualização de informações pessoais,"Seguir: manter comunicação ativa | Não seguir: risco de perda de contato",Atualizado,encerrado

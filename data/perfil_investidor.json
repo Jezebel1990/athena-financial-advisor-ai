@@ -1,23 +1,39 @@
 {
-  "nome": "João Silva",
-  "idade": 32,
-  "profissao": "Analista de Sistemas",
-  "renda_mensal": 5000.00,
-  "perfil_investidor": "moderado",
-  "objetivo_principal": "Construir reserva de emergência",
-  "patrimonio_total": 15000.00,
-  "reserva_emergencia_atual": 10000.00,
-  "aceita_risco": false,
-  "metas": [
-    {
-      "meta": "Completar reserva de emergência",
-      "valor_necessario": 15000.00,
-      "prazo": "2026-06"
+  "perfil_investidor": {
+    "dados_pessoais": {
+      "nome": "João Silva",
+      "idade": 32,
+      "profissao": "Analista de Sistemas"
     },
-    {
-      "meta": "Entrada do apartamento",
-      "valor_necessario": 50000.00,
-      "prazo": "2027-12"
+    "financeiro": {
+      "renda_mensal": 5000.00,
+      "patrimonio_total": 15000.00,
+      "reserva_emergencia_atual": 10000.00,
+      "objetivo_principal": "Construir reserva de emergência"
+    },
+    "perfil": {
+      "perfil_investidor": "moderado",
+      "aceita_risco": false
+    },
+    "metas": [
+      {
+        "meta": "Completar reserva de emergência",
+        "valor_necessario": 15000.00,
+        "prazo": "2026-06",
+        "prioridade": "alta",
+        "tipo": "curto_prazo"
+      },
+      {
+        "meta": "Entrada do apartamento",
+        "valor_necessario": 50000.00,
+        "prazo": "2027-12",
+        "prioridade": "media",
+        "tipo": "medio_prazo"
+      }
+    ],
+    "indicadores": {
+      "reserva_percentual_concluida": 66.7,
+      "meses_estimados_para_meta_principal": 8
     }
-  ]
+  }
 }
