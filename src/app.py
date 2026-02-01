@@ -152,16 +152,26 @@ Pergunta do usuário:
         "Authorization": f"Bearer {OLLAMA_API_KEY}",
         "Content-Type": "application/json"
     },
-        json={
+         json={
             "model": MODELO,
-            "prompt": prompt,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
             "stream": False
         },
         timeout=120
     )
 
     response.raise_for_status()
-    return response.json()["response"], prompt
+    data = response.json()
+
+    # Cloud API retorna assim
+    resposta = data["message"]["content"]
+
+    return resposta, prompt
 
 # ================= INTERFACE STREAMLIT =================
 
