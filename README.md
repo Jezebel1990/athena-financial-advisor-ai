@@ -129,19 +129,28 @@ flowchart LR
 ### Pré-requisitos
 
 - Python 3.9+
-- [Ollama](https://ollama.ai/) instalado
-- Modelo LLM disponível
+- Conta no Ollama Cloud (para uso de modelos cloud)
+- Conta no Langfuse (opcional, para observabilidade)
 
-### 1️⃣ Setup do Ollama
+### 1️⃣ Setup do Ollama (Cloud)
 
-```bash
-# Executar o modelo local
-ollama run gpt-oss:20b-cloud
-```
+Este projeto utiliza Ollama Cloud Models, que não exigem GPU local.
 
-> 💡 O projeto suporta outros modelos locais ou APIs externas de LLM
+1. Crie uma conta em:
+👉 [https://ollama.com](https://ollama.com)
 
-### 2️⃣ Instalação
+2. Gere uma API Key no painel do Ollama.
+ℹ️ Não é necessário rodar ollama run localmente quando usando Ollama Cloud.
+
+
+> **Modelos Suportados**
+>  Modelo padrão configurado:
+>  ```text
+> gpt-oss:20b-cloud
+> ```
+> O projeto pode ser adaptado para outros modelos do Ollama Cloud alterando apenas o `.env`.
+
+### 2️⃣ Instalação do Projeto
 
 ```bash
 # Clonar o repositório
@@ -158,23 +167,49 @@ venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Execução
+### 3️⃣ Configuração das Variáveis de Ambiente
+
+O projeto utiliza um arquivo `.env` para configurar o acesso ao **Ollama Cloud** e ao **Langfuse** (observabilidade).
+
+1. Crie o arquivo `.env` a partir do exemplo:
 
 ```bash
-# Rodar a aplicação
-python -m streamlit run src/app.py
+cp .env.example .env
 ```
 
-A interface será aberta automaticamente no navegador em `http://localhost:8501`
+2. Abra o arquivo `.env` e preencha com suas credenciais:
+- Chaves do Langfuse (monitoramento e observabilidade)
+- API Key do Ollama Cloud
+- Modelo LLM desejado
 
-### 4️⃣ Configuração do Langfuse
+> ⚠️ **Importante**
+> O arquivo `.env` não deve ser versionado. Certifique-se de que ele está listado no `.gitignore`.
+
+### 4️⃣ Execução da Aplicação
 
 ```bash
-# Adicionar variáveis de ambiente
-export LANGFUSE_PUBLIC_KEY="sua-chave"
-export LANGFUSE_SECRET_KEY="sua-chave-secreta"
-export LANGFUSE_HOST="https://cloud.langfuse.com"
+ python -m streamlit run src/app.py
 ```
+Após executar o comando, a aplicação será aberta automaticamente em:
+
+```arduino
+ http://localhost:8501
+```
+
+
+### 5️⃣ Observabilidade (Langfuse)
+
+Com o Langfuse configurado, o projeto passa a monitorar:
+- Tempo de resposta e latência
+- Uso estimado de tokens
+- Erros do modelo
+- Histórico de interações do agente
+
+Isso permite:
+- Evolução contínua do agente
+- Análise de qualidade das respostas
+- Maior confiabilidade em produção
+
 
 ---
 
@@ -227,7 +262,22 @@ A aplicação é totalmente instrumentada com **Langfuse**, permitindo:
 
 ---
 
+## 🎤 Pitch
 
+Por se tratar de um projeto baseado em **Inteligência Artificial Generativa**, o pitch da solução também foi desenvolvido de forma alinhada ao conceito do projeto.
+
+O roteiro do pitch foi criado a partir de **prompts estruturados** no aplicativo **HeyGen**, permitindo que a própria agente **Atena** apresente o problema, a solução, a demonstração e o impacto do projeto de forma clara e objetiva.
+
+🎬 **Vídeo do Pitch:**  
+[![Atena Pitch](https://img.youtube.com/vi/2ldXk8eBRsQ/0.jpg)](https://youtube.com/shorts/2ldXk8eBRsQ)
+
+O vídeo apresenta:
+- O problema enfrentado por pessoas na tomada de decisões financeiras
+- Como a Atena utiliza dados do cliente para análise contextualizada
+- A demonstração da interface e da interação com o agente
+- O diferencial do uso de IA com foco em educação financeira e impacto social
+
+--- 
 ## ⚖️ Aviso Legal
 
 > ⚠️ **Este projeto é educacional e demonstrativo.**
